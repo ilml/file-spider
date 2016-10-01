@@ -6,16 +6,15 @@ Created on Tue Sep 27 11:11:10 2016
 """
 '''
 need to add:
-tranform to a single list
-searching of a certain type of file 
+
 '''
 #Seek all files in a certain directory
 #nta:file name
+temp = []
 def fileseek(addr):
     import os
     try:
-        os.chdir(addr) 
-        temp = []
+        os.chdir(addr)  
         for file in os.listdir(addr):
             if os.path.isdir(file):
                 newfile = os.path.join(os.getcwd(),file)
@@ -23,12 +22,11 @@ def fileseek(addr):
                 os.chdir('..')
             else:          
                 temp.append(file)
-        return temp
     except:
-        return  []
-    
-#print(fileseek('H:\\python'))
+        pass
 
+#print(fileseek('H:\\python'))
+#fileseek('H:\\')
 
 #Get the partition of the harddisk
 def disk(): 
@@ -63,15 +61,26 @@ def test(choose_disk='H:'):
         fileseek(choose_disk+'\\')
         end = time.time()
         cost = end - start
-        print(cost)
+        print('Running time: %f'%cost)
     else:
         print('Disk doesn\'t exist,please try another disk.')
     
     
+temp1 = []
+def tree2list(L):
+    for i in L:
+        if isinstance(i,list):
+            tree2list(i)
+        else:
+            temp1.append(i)   
     
     
-    
-    
-    
-    
+def file_search(L,*kind):
+    temp = []
+    for f in L:
+        if f!=None:
+            for k in kind:
+                if f[-len(k):]==k:
+                    temp.append(f)
+    return temp        
    
